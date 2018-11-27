@@ -1,0 +1,55 @@
+#Data cleaning using the data.table package( its faster to work on row)
+#Datasets to be used are in the Datasets Base Package in R
+
+data("airquality")
+airpp <- airquality
+head(airquality) #to view the first few sets of values in the airquality dataset
+data("iris")
+head(iris) #to view the first set of values in the iris dataset
+airis <-iris
+
+#converting the variables to the data.table form
+airpp <- data.table(airpp) 
+airpp
+airis <- data.table(airis)
+airis
+
+
+###subsetting the 2nd to 6th row(remember to use a square bracket while subsetting)
+airpp[2:6,]
+
+### selecting columns with particular values
+## select all rows that haves the setosa and virginica
+airis[Species == 'setosa']
+
+## Selecting column with multiple values
+##Selecting columns with setosa and virginica species note to always use  %in% to co
+airis[Species %in% c('setosa', 'virginica')]
+
+## Select any column of chioce; it sees it as a matrix
+airpp[,Temp]
+
+## to print the values of Temp and Month
+airpp[,.(Temp,Month)]
+
+#to Sum together
+airpp[,sum(Temp, na.rm = TRUE)]
+
+##sum and generate standard deviation.
+airpp[,.(sum(Temp, na.rm = TRUE), sd(Temp, na.rm = TRUE))]
+
+
+## to Calculate the sum of the Sepal length for each Specie
+
+head(airis)
+airis[,.(sum(Sepal.Length, na.rm =TRUE)), by =Species]
+
+airis[,.(sumofsepal =sum(Sepal.Length, na.rm =TRUE)), by =Species]
+airis[,.(sum(Sepal.Length, na.rm =TRUE)), by =2:10] ### check it out
+
+
+sword <- airpp[2:6,]
+word[,.(sum(Sepal.Length, na.rm = TRUE))]
+sum(sword)
+print(sword)
+sum(airpp[2:6,])
